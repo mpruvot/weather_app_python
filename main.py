@@ -4,7 +4,7 @@ import json
 import logging
 import os
 from dotenv import load_dotenv
-from colorama import Fore
+from colorama import Fore, Style, init
 from custom_exception import *
 
 
@@ -70,7 +70,7 @@ class WeatherFinder:
     def __init__(self) -> None:
         pass
 
-    def get_city(self, city: str) -> CityWeather:
+    def get_weather_for_city(self, city: str) -> CityWeather:
         """Get city informations from the WeatherStack API
 
         Args:
@@ -199,3 +199,41 @@ class History:
             logging.exception("Fichier introuvable")
         except json.JSONDecodeError:
             logging.exception("Erreur de décodage JSON")
+
+def main():
+    # Initialize Colorama for colored output
+    init()
+
+    # Create an instance of WeatherFinder
+    weather_finder = WeatherFinder()
+
+    # Main loop
+    while True:
+        # Ask the user for the city name or to exit the program
+        city = input("Enter the name of a city to get the weather or 'exit' to quit: ").strip()
+        if city.lower() == 'exit':
+            print(Fore.CYAN + "Exiting the weather app. Goodbye!".center(80) + Style.RESET_ALL)
+            break
+
+        try:
+            # Get weather for the city
+            city_weather = weather_finder.get_weather_for_city(city)
+
+            # Display the weather information
+            print(Fore.GREEN + "Weather Information:".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"City: {city_weather.city}".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Country: {city_weather.country}".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Region: {city_weather.region}".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Local Time: {city_weather.local_time}".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Temperature: {city_weather.temp}°C".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Weather Description: {', '.join(city_weather.description)}".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Wind Speed: {city_weather.wind_speed} km/h".center(80) + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Weather Icon: {city_weather.icon}".center(80) + Style.RESET_ALL)
+
+        except Exception as e:
+            # Handle any errors that occur during the API call
+            print(Fore.RED + f"An error occurred: {e}".center(80) + Style.RESET_ALL)
+
+# Call the main function to start the program
+if __name__ == "__main__":
+    main()

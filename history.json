@@ -1,1 +1,1 @@
-[]
+[{"city": "Paris", "_country": "France", "region": "Ile-de-France", "local_time": "2023-11-04 15:31", "_temp": 14, "icon": ["https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0018_cloudy_with_heavy_rain.png"], "description": ["Rain Shower"], "wind_speed": 33}, {"city": "Toulouse", "_country": "France", "region": "Midi-Pyrenees", "local_time": "2023-11-04 15:31", "_temp": 13, "icon": ["https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0017_cloudy_with_light_rain.png"], "description": ["Light Rain, Mist"], "wind_speed": 11}]
